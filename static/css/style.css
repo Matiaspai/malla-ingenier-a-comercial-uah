@@ -1,0 +1,92 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+header {
+  background-color: var(--primary);
+  color: white;
+  padding: 20px;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.controls {
+  padding: 15px 20px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: var(--bg);
+}
+
+.container {
+  padding: 20px;
+}
+
+.semestre {
+  margin-bottom: 30px;
+}
+
+.cursos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.curso {
+  padding: 15px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  min-width: 200px;
+  text-align: center;
+  box-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+.curso.bloqueado {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.curso.disponible {
+  background-color: var(--accent);
+  color: white;
+}
+
+.curso.aprobado {
+  background-color: var(--success);
+  color: white;
+  box-shadow: inset 2px 2px 5px rgba(0,0,0,0.4);
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9rem;
+  color: #888;
+}
+
+/* Paleta Claro */
+body.claro {
+  --bg: #f5f7fa;
+  --text: #111;
+  --primary: #007acc;
+  --accent: #007acc;
+  --success: #009900;
+}
+
+/* Paleta Oscuro */
+body.oscuro {
+  --bg: #1e1e2f;
+  --text: #eee;
+  --primary: #2f4cdd;
+  --accent: #00c3ff;
+  --success: #33cc66;
+}
