@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Malla Curricular UAH</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script defer src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+<body>
+  <header>
+    Malla Curricular Ingeniería Comercial — Versión para UAH
+  </header>
+
+  <div class="controls">
+    <label for="mencion">Mención:</label>
+    <select id="mencion" onchange="cambiarMencion()">
+      <option value="economia" {% if mencion == 'economia' %}selected{% endif %}>Economía</option>
+      <option value="administracion" {% if mencion == 'administracion' %}selected{% endif %}>Administración</option>
+    </select>
+
+    <label for="modo">Tema:</label>
+    <select id="modo" onchange="cambiarModo()">
+      <option value="claro">Claro</option>
+      <option value="oscuro">Oscuro</option>
+    </select>
+
+    <button onclick="resetear()">Resetear todo</button>
+  </div>
+
+  <div class="container">
+    {% for semestre, cursos in malla.items() %}
+      <section class="semestre">
+        <h2>Semestre {{ semestre }}</h2>
+        <div class="cursos">
+          {% for curso in cursos %}
+            {% set estado = progreso.get(mencion, {}).get(curso['nombre'], '') %}
+            {% set habilitado = all(progreso.get(mencion, {}).get(req, '') == "aprobado" for req in curso['requisitos']) %}
+            <div class="curso {% if estado == 'aprobado' %}aprobado{% elif habilitado %}disponible{% else %}bloqueado{% endif %}"
+                 onclick="cambiarEstado('{{ mencion }}', '{{ curso['nombre'] }}')">
+              {{ curso['nombre'] }}
+            </div>
+          {% endfor %}
+        </div>
+      </section>
+    {% endfor %}
+  </div>
+
+  <footer>
+    Desarrollado por Matías — Flask WebApp
+  </footer>
+</body>
+</html>
